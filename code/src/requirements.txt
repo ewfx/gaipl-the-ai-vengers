@@ -1,0 +1,8 @@
+streamlit
+chromadb
+sentence-transformers
+transformers
+huggingface_hub
+pandas
+openpyxl
+torch
