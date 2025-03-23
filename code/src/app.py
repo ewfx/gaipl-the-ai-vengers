@@ -3,8 +3,12 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 from huggingface_hub import InferenceClient
+from langchain_core.messages import AIMessage
 import pandas as pd
 import os
+from agent_setup import run_agent 
+import streamlit as st
+
 
 client = InferenceClient(
     provider="hf-inference",
@@ -60,7 +64,7 @@ def generate_response(prompt, context):
  
 
 # Streamlit UI
-st.title("RAG-based Q&A with Hugging Face 🚀")
+st.title("AI Chatbot for platform Engineers 🚀")
 
 # File Upload
 uploaded_file = st.file_uploader("Upload a xlsx file", type=["xlsx"])
@@ -70,6 +74,10 @@ if uploaded_file:
     add_document_to_db(document_text, uploaded_file.name)
     st.success("Document added to ChromaDB!")
 
+    
+if "answer" not in st.session_state:
+    st.session_state.answer = None 
+
 # Query Input
 query = st.text_input("Ask a question from the document")
 if st.button("Get Answer"):
@@ -77,7 +85,21 @@ if st.button("Get Answer"):
         context = retrieve_context(query)
         print("the context is : "+context)
         if context:
-            answer = generate_response(query, context)
-            st.write("### Answer:", answer)
+            st.session_state.answer = generate_response(query, context)
+            st.write("### Answer:", st.session_state.answer )
         else:
             st.write("No relevant context found!")
+
+if st.session_state.answer and "restarting" in st.session_state.answer.lower():
+    if st.button("Run Agent Task"):
+        action_response = run_agent(st.session_state.answer)
+
+        # Extract only AIMessage contents
+        ai_messages = [msg.content for msg in action_response.messages if isinstance(msg, AIMessage)]
+
+        # Display AI response in UI
+        if ai_messages:
+            st.write("### Action Executed:")
+            for msg in ai_messages:
+                st.write(msg)
+   
