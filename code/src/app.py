@@ -6,8 +6,8 @@ from rag import extract_text_from_excel, add_document_to_db, retrieve_context, g
 # Mock action suggestions (can be expanded dynamically)
 actions = [
     {"name": "Restart Service"},
-    {"name": "Get Server Status"},
-    {"name": "Check System Logs"},
+    {"name": "Get Service Status"},
+    {"name": "Get System Logs"},
     {"name": "Send Email"}
 ]
 
@@ -39,7 +39,7 @@ with st.sidebar:
         "- Fetching logs 📜\n"
         "- Ask me anything!"
     )
-    # Chat UI
+# Chat UI
 st.markdown("### 💬 Chat with the AI")
 
 # User Input Field
@@ -59,9 +59,9 @@ if user_input:
 # Display chat history in a conversational format
 for message in st.session_state.chat_history:
     if isinstance(message, HumanMessage):
-        st.markdown(f"🟢 **You:** {message.content}")
+        st.markdown(f"🟢 **Platform Engineer:** {message.content}")
     else:
-        st.markdown(f"🤖 **Platform Engineer:** {message.content}")
+        st.markdown(f"🤖 **AI Bot:** {message.content}")
         
         
 # Display suggested actions
@@ -72,3 +72,4 @@ if actions and len(st.session_state.chat_history) > 1:
             st.session_state.chat_history.append(HumanMessage(content=action["name"]))
             action_response = run_agent(action["name"])
             st.session_state.chat_history.append(AIMessage(content=action_response.messages[1].content))
+            st.rerun()
