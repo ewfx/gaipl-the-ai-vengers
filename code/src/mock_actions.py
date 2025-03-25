@@ -1,5 +1,4 @@
 import time
-from telemetry_scheduler import telemetry_data
 
 # ✅ Mock functions to simulate server tasks
 def mock_restart_service(service_name: str):
