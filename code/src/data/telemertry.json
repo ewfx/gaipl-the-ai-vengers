@@ -1,6 +1,7 @@
 [{
     "timestamp": "2025-03-24T10:15:32Z",
     "server": "server-1",
+    "service": "Order Service",
     "metric": "CPU Usage",
     "value": "85%",
     "severity": "warning",
@@ -8,6 +9,7 @@
 },{
     "timestamp": "2025-03-24T10:15:32Z",
     "server": "server-2",
+    "service": "Customer Service",
     "metric": "CPU Usage",
     "value": "30%",
     "severity": "info",
@@ -15,6 +17,7 @@
 },{
     "timestamp": "2025-03-24T10:15:32Z",
     "server": "server-3",
+    "service": "Delivery Service",
     "metric": "CPU Usage",
     "value": "95%",
     "severity": "warning",
@@ -22,6 +25,7 @@
 },{
     "timestamp": "2025-03-24T10:15:32Z",
     "server": "server-3",
+    "service": "Delivery Service",
     "metric": "Thread Blocks",
     "value": "100",
     "severity": "warning",

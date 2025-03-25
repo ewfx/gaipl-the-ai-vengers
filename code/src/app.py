@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
 from agent_setup import run_agent
-from rag import extract_text_from_excel, add_document_to_db, retrieve_context, generate_response
+from rag import extract_text_from_excel, add_document_to_db, retrieve_context, generate_response, load_initial_knowledge
 
 # Mock action suggestions (can be expanded dynamically)
 actions = [
@@ -23,6 +23,8 @@ if uploaded_file:
     document_text = extract_text_from_excel(uploaded_file)
     add_document_to_db(document_text, uploaded_file.name)
     st.success("Document added to ChromaDB!")
+
+load_initial_knowledge("data")
 
 # Initialize chat history if not present
 if "chat_history" not in st.session_state:

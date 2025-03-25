@@ -8,7 +8,7 @@ from langgraph.graph import StateGraph
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.runnables import RunnableLambda
 from langchain_core.messages import BaseMessage
-from mock_actions import mock_restart_server, mock_get_server_status, mock_get_server_status, mock_get_system_logs, mock_send_email
+from mock_actions import mock_restart_service, mock_get_service_status, mock_get_system_logs, mock_send_email
 
 # ✅ Define State Schema
 class AgentState(BaseModel):
@@ -16,31 +16,31 @@ class AgentState(BaseModel):
     next: str  # Stores the next action to perform
 
 # ✅ Define tool input schemas
-class RestartServerInput(BaseModel):
-    server_name: str
+class RestartServiceInput(BaseModel):
+    service_name: str
 
-class GetServerStatusInput(BaseModel):
-    server_name: str
+class GetServiceStatusInput(BaseModel):
+    service_name: str
 
 class GetSystemLogsInput(BaseModel):
-    server_name: str
+    service_name: str
 
 class SendEmailInput(BaseModel):
-    server_name: str
+    service_name: str
 
 # ✅ Define structured tools
-restart_server_tool = StructuredTool.from_function(
-    func=mock_restart_server,
-    name="Restart Server",
-    description="Use this tool to restart a given server by providing its name.",
-    args_schema=RestartServerInput
+restart_service_tool = StructuredTool.from_function(
+    func=mock_restart_service,
+    name="Restart Service",
+    description="Use this tool to restart a given service by providing its name.",
+    args_schema=RestartServiceInput
 )
 
-get_server_status_tool = StructuredTool.from_function(
-    func=mock_get_server_status,
-    name="Get Server Status",
-    description="Use this tool to get the status of a given server.",
-    args_schema=GetServerStatusInput
+get_service_status_tool = StructuredTool.from_function(
+    func=mock_get_service_status,
+    name="Get Service Status",
+    description="Use this tool to get the status of a given service.",
+    args_schema=GetServiceStatusInput
 )
 
 get_system_logs_tool = StructuredTool.from_function(
@@ -59,7 +59,7 @@ send_email_tool = StructuredTool.from_function(
 
 # ✅ Define the system prompt
 system_prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a helpful AI assistant that can manage servers."),
+    ("system", "You are a helpful AI assistant that can manage servers/services."),
     ("human", "{input}")
 ])
 
@@ -68,10 +68,10 @@ def decide_action(state: AgentState) -> AgentState:
     latest_message = state.messages[-1].content.lower()
 
     if "restart" in latest_message and "service" in latest_message:
-        return AgentState(messages=state.messages, next="restart_server")
+        return AgentState(messages=state.messages, next="restart_service")
     
     elif "status" in latest_message and "service" in latest_message:
-        return AgentState(messages=state.messages, next="get_server_status")
+        return AgentState(messages=state.messages, next="get_service_status")
     
     elif "logs" in latest_message and "system" in latest_message:
         return AgentState(messages=state.messages, next="get_system_logs")
@@ -85,46 +85,46 @@ def decide_action(state: AgentState) -> AgentState:
 
 # ✅ Function to handle normal responses
 def respond(state: AgentState):
-    ai_response = AIMessage(content="No Actions executed! You can ask me to restart a server or check its status.")
+    ai_response = AIMessage(content="No Actions executed! You can ask me to restart a service or check its status.")
     return AgentState(messages=state.messages + [ai_response],next="decide")
 
-# ✅ Function to restart server
+# ✅ Function to restart service
 def restart_server(state: AgentState):
-    response = mock_restart_server(get_server_name_from_state(state))
+    response = mock_restart_service(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to get server status
 def get_server_status(state: AgentState):
-    response = mock_get_server_status(get_server_name_from_state(state))
+    response = mock_get_service_status(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to get system logs
 def get_system_logs(state: AgentState):
-    response = mock_get_system_logs(get_server_name_from_state(state))
+    response = mock_get_system_logs(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to send email
 def send_email(state: AgentState):
-    response = mock_send_email(get_server_name_from_state(state))
+    response = mock_send_email(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 
 # ✅ Create the LangGraph workflow
 workflow = StateGraph(AgentState)
 
-def get_server_name_from_state(state: AgentState) -> str:
+def get_service_name_from_state(state: AgentState) -> str:
     # Iterate through messages to find relevant content
     for message in state.messages:
         if isinstance(message, (HumanMessage, AIMessage)):  # Check if it's user input
             content = message.content.lower()
             words = content.split()
             
-            # Example: If the user message contains "server-12", extract it
+            # Example: If the user message contains "Order Service", extract it
             for word in words:
-                if word.startswith("server-"):  # Check for server naming pattern
+                if "service" in word.lower():  # Check for service naming pattern
                     return word  # Return the first match
             
-    return "server-1"  # Default if no server name found
+    return "service-1"  # Default if no service name found
 
 # ✅ Define nodes
 workflow.add_node("decide", RunnableLambda(decide_action))
