@@ -89,23 +89,23 @@ def respond(state: AgentState):
     return AgentState(messages=state.messages + [ai_response],next="decide")
 
 # ✅ Function to restart service
-def restart_server(state: AgentState):
-    response = mock_restart_service(get_service_name_from_state(state))
+def restart_service(state: AgentState):
+    response = restart_service_tool.func("service-1")
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to get server status
-def get_server_status(state: AgentState):
-    response = mock_get_service_status(get_service_name_from_state(state))
+def get_service_status(state: AgentState):
+    response = get_service_status_tool.func(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to get system logs
 def get_system_logs(state: AgentState):
-    response = mock_get_system_logs(get_service_name_from_state(state))
+    response = get_system_logs_tool.func(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to send email
 def send_email(state: AgentState):
-    response = mock_send_email(get_service_name_from_state(state))
+    response = send_email_tool.func(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 
@@ -129,8 +129,8 @@ def get_service_name_from_state(state: AgentState) -> str:
 # ✅ Define nodes
 workflow.add_node("decide", RunnableLambda(decide_action))
 workflow.add_node("respond", RunnableLambda(respond))
-workflow.add_node("restart_server", RunnableLambda(restart_server))
-workflow.add_node("get_server_status", RunnableLambda(get_server_status))
+workflow.add_node("restart_service", RunnableLambda(restart_service))
+workflow.add_node("get_service_status", RunnableLambda(get_service_status))
 workflow.add_node("get_system_logs", RunnableLambda(get_system_logs))
 workflow.add_node("send_email", RunnableLambda(send_email))
 
