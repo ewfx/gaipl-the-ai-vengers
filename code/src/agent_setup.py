@@ -90,7 +90,7 @@ def respond(state: AgentState):
 
 # ✅ Function to restart service
 def restart_service(state: AgentState):
-    response = restart_service_tool.func("service-1")
+    response = restart_service_tool.func(get_service_name_from_state(state))
     return AgentState(messages=state.messages + [AIMessage(content=response)], next="decide")
 
 # ✅ Function to get server status
