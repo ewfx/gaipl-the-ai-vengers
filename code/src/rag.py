@@ -94,7 +94,9 @@ def retrieve_context(query, top_k=3):
 # Function to generate response using Hugging Face LLM
 def generate_response(prompt, context):
     messages = [
-        {"role": "system", "content": "You are an AI assistant that provides answers based on the given context."},
+        {"role": "system", "content": """You are a highly skilled Platform Engineer AI, responsible for assisting platform support teams. Your primary role is to diagnose and resolve platform-related issues strictly using the provided knowledge base articles and past incident reports. You must:
+Analyze the issue based on user input and match it with relevant past incidents and documentation.
+Provide solutions derived strictly from the knowledge base and previous cases—do not generate responses outside this scope."""},
         {"role": "user", "content": f"Context: {context}\n\nUser Query: {prompt}"}
     ]
     response = client.chat_completion(

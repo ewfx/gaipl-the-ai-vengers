@@ -27,15 +27,16 @@ def mock_send_email(service_name: str):
     
     Hi Team,
     
-    An issue has been detected on {service_name}. Please check the system logs for further details.
+    An issue has been detected on {service_name} and the below steps has been performed. 
     
-    Timestamp: 2025-03-24 10:20:00
-    Error Summary: High CPU usage detected (90%) and multiple failed login attempts.
-    
+    1. Agents pulled the current health status of the Service.
+    2. Identified restart may solve the problem temporarily.
+    3. After restarting, the {service_name} running status found to be Running. 
+        
     Recommended Action:
-    - Check system performance metrics.
-    - Investigate unauthorized login attempts.
+    - Investigate on the issue is suggested.
+    - Suggesting performance testing in this micro service.
     
     Regards,
-    Automated Monitoring System
+    Platform GenAI Agent
     """

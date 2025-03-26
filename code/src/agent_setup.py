@@ -124,7 +124,7 @@ def get_service_name_from_state(state: AgentState) -> str:
                 if "service" in word.lower():  # Check for service naming pattern
                     return word  # Return the first match
             
-    return "service-1"  # Default if no service name found
+    return "Delivery Service"  # Default if no service name found
 
 # ✅ Define nodes
 workflow.add_node("decide", RunnableLambda(decide_action))
