@@ -18,7 +18,8 @@ The AI Vengers is an Integrated Platform Environment (IPE) designed for platform
 
 
 ## 🎥 Demo  
-📹 [Video Demo](https://github.com/ewfx/gaipl-the-ai-vengers/blob/main/artifacts/demo/REC-20250326131536.mp4)  
+📹 [Video Demo](https://github.com/ewfx/gaipl-the-ai-vengers/blob/main/artifacts/demo/REC-20250326131536.mp4)
+[PPT](https://github.com/ewfx/gaipl-the-ai-vengers/blob/main/artifacts/demo/GenAI_IPE_Hackathon_Presentation.pptx)
 
 
 ## 💡 Inspiration
@@ -66,5 +67,5 @@ Managing large-scale platform operations requires **fast troubleshooting and aut
 - **Deployment:** Docker, MCP Server
 
 ## 👥 Team
-- **Jagannathan VS** - [GitHub](#) | [LinkedIn](#)
-- **Suneel Gandham** - [GitHub](#) | [LinkedIn](#)
+- **Jagannathan VS** - [GitHub](https://github.com/jagan080) | [LinkedIn](https://www.linkedin.com/in/jagan-vangoor-58b27217/)
+- **Suneel Gandham** 
