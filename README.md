@@ -62,7 +62,7 @@ Managing large-scale platform operations requires **fast troubleshooting and aut
 
 ## 🏗️ Tech Stack
 - **LLM:** Mistral-7B-Instruct-v0.1
-- **Backend:** FastAPI, LangChain, LangGraph
+- **Backend:** LangChain, LangGraph, Chromadb, all-MiniLM-L6-v2
 - **Frontend:** Streamlit
 - **Deployment:** Docker, MCP Server
 
