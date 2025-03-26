@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 The AI Vengers
 
 ## 📌 Table of Contents
 - [Introduction](#introduction)
@@ -14,7 +14,7 @@
 ---
 
 ## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+The AI Vengers is an Integrated Platform Environment (IPE) designed for platform support teams. It incorporates **LLMs, agentic capabilities, and contextual recommendations** to streamline platform management and automate workflows.
 
 ## 🎥 Demo
 🔗 [Live Demo](#) (if applicable)  
@@ -24,37 +24,49 @@ A brief overview of your project and its purpose. Mention which problem statemen
 ![Screenshot 1](link-to-image)
 
 ## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+Managing large-scale platform operations requires **fast troubleshooting and automation** to reduce downtime. Our inspiration was to build an **AI-driven assistant** that understands platform issues, suggests actions, and can even execute predefined workflows autonomously.
 
 ## ⚙️ What It Does
-Explain the key features and functionalities of your project.
+- Uses **Mistral-7B-Instruct-v0.1** for **context-aware decision-making**.
+- Provides **real-time server status monitoring**.
+- Enables **agent-driven automation**, including server restarts.
+- Supports **chat-based interactions** for troubleshooting.
+- Integrates with **MCP Server** for task execution.
 
 ## 🛠️ How We Built It
-Briefly outline the technologies, frameworks, and tools used in development.
+- **LLM:** Mistral-7B-Instruct-v0.1
+- **Frameworks:** LangChain, LangGraph for agent workflow orchestration
+- **Backend:** FastAPI
+- **Frontend:** Streamlit
+- **Deployment:** Docker, MCP Server integration
 
 ## 🚧 Challenges We Faced
-Describe the major technical or non-technical challenges your team encountered.
+- Fine-tuning agent behavior for effective tool use.
+- Integrating LLM-driven contextual understanding.
+- Handling API rate limits and performance optimization.
 
 ## 🏃 How to Run
 1. Clone the repository  
    ```sh
-   git clone https://github.com/your-repo.git
+   git clone https://github.com/ewfx/gaipl-the-ai-vengers.git
+   cd gaipl-the-ai-vengers
    ```
-2. Install dependencies  
+2. Build and run the Docker container  
    ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
+   docker build -t ai-vengers .
+   docker run -p 8501:8501 ai-vengers
    ```
-3. Run the project  
-   ```sh
-   npm start  # or python app.py
+3. Access the app in your browser at  
+   ```
+   http://localhost:8501
    ```
 
 ## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+- **LLM:** Mistral-7B-Instruct-v0.1
+- **Backend:** FastAPI, LangChain, LangGraph
+- **Frontend:** Streamlit
+- **Deployment:** Docker, MCP Server
 
 ## 👥 Team
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)
+- **Jagannathan VS** - [GitHub](#) | [LinkedIn](#)
+- **Suneel Gandham** - [GitHub](#) | [LinkedIn](#)

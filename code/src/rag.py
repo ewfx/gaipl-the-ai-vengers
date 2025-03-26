@@ -6,7 +6,6 @@ import pandas as pd
 import fitz  # PyMuPDF
 import json
 import os
-from docx import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
 
