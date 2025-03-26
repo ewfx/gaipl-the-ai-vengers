@@ -16,12 +16,10 @@
 ## 🎯 Introduction
 The AI Vengers is an Integrated Platform Environment (IPE) designed for platform support teams. It incorporates **LLMs, agentic capabilities, and contextual recommendations** to streamline platform management and automate workflows.
 
-## 🎥 Demo
-🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
 
-![Screenshot 1](link-to-image)
+## 🎥 Demo  
+📹 [Video Demo](https://github.com/ewfx/gaipl-the-ai-vengers/blob/main/artifacts/demo/REC-20250326131536.mp4)  
+
 
 ## 💡 Inspiration
 Managing large-scale platform operations requires **fast troubleshooting and automation** to reduce downtime. Our inspiration was to build an **AI-driven assistant** that understands platform issues, suggests actions, and can even execute predefined workflows autonomously.
